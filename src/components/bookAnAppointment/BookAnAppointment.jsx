@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import TickMark from "../../assets/TickMark.png";
 import { FiClipboard } from "react-icons/fi";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const BookAnAppointment = () => {
+  const [selectedMorningSession, setSelectedMorningSession] = useState(null);
+  const morningSessions = [
+    { id: 1, session: "09:00 AM" },
+    { id: 2, session: "09:30 AM" },
+    { id: 3, session: "10:00 AM" },
+    { id: 4, session: "10:15 AM" },
+    { id: 5, session: "10:45 AM" },
+    { id: 6, session: "11:00 AM" },
+  ];
+  const handleAppointment = () => {
+    console.log("You have book an appointment");
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Your have successfully book an appointment",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
+  const handleSelectSession = (id) => {
+    console.log(id);
+    setSelectedMorningSession(id);
+  };
   return (
     <>
       <div className="px-5 py-4 border rounded-lg">
@@ -97,24 +122,19 @@ const BookAnAppointment = () => {
             <div>
               <h1 className="ml-5 my-8 text-[18px] font-bold">Morning</h1>
               <div className="ml-5 flex flex-wrap gap-4">
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  09:00 AM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  09:30 AM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  10:00 AM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  10:15 AM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  10:45 AM
-                </button>
-                <button className="px-4 py-3 bg-[#3A643B] text-white border border-[#EBEBEB] rounded-2xl">
-                  11:00 AM
-                </button>
+                {morningSessions.map((morningSession, index) => (
+                  <button
+                    onClick={() => handleSelectSession(morningSession.id)}
+                    key={index}
+                    className={
+                      selectedMorningSession === morningSession.id
+                        ? "px-4 py-3 border border-[#EBEBEB] rounded-2xl bg-[#3A643B] text-white"
+                        : "px-4 py-3 border border-[#EBEBEB] rounded-2xl"
+                    }
+                  >
+                    {morningSession.session}
+                  </button>
+                ))}
               </div>
             </div>
             {/* evening session */}
@@ -141,7 +161,10 @@ const BookAnAppointment = () => {
           </div>
         </div>
         <div className="w-full px-10 mx-5 my-10">
-          <button className="w-full py-5 px-6 text-white text-[20px] font-normal rounded-lg bg-[#3A643B]">
+          <button
+            onClick={handleAppointment}
+            className="w-full py-5 px-6 text-white text-[20px] font-normal rounded-lg bg-[#3A643B]"
+          >
             Make An Appointment
           </button>
         </div>
