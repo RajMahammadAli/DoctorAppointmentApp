@@ -14,7 +14,7 @@ Node.js installed on your local machine
 
 ## Installation
 Clone the repository:
-git clone https://github.com/your-username/todo-app.git
+git clone https://github.com/RajMahammadAli/DoctorAppointmentApp.git
 
 ## Navigate into the project directory:
 cd DoctorAppointmentApp
