@@ -4,8 +4,22 @@ import banner from "../../assets/amrutam.png";
 import profilePic from "../../assets/profilePic.png";
 import bluetic from "../../assets/bluetic.png";
 import { IoStarSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Banner = () => {
+  const navigate = useNavigate();
+  const handleAppointment = () => {
+    console.log("You have book an appointment");
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Your have successfully book an appointment",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    navigate("/findDoctors");
+  };
   return (
     <div className="container mx-auto mt-14 w-full h-auto md:h-72 bg-[#FFF7E2] rounded-t-lg">
       <img
@@ -67,7 +81,10 @@ const Banner = () => {
           </div>
         </div>
         <div className="w-full md:w-[40%] flex justify-end mb-5">
-          <button className="bg-[#3A643B] px-5 py-3 rounded-lg text-[20px] text-white font-medium">
+          <button
+            onClick={handleAppointment}
+            className="bg-[#3A643B] px-5 py-3 rounded-lg text-[20px] text-white font-medium"
+          >
             Book An Appointment
           </button>
         </div>

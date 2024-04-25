@@ -10,8 +10,8 @@ const SpecializeIn = () => {
           </h1>
         </div>
 
-        <div className="flex gap-4 justify-start px-10 py-5">
-          <div>
+        <div className="flex flex-col md:flex-row gap-4 justify-center items-center md:justify-start px-10 py-5">
+          <div className="flex flex-col justify-center items-center">
             <div className="w-[86px] h-[86px] rounded-lg bg-[#FFF7E2] flex justify-center items-center text-[#3A643B] border">
               <div className="w-[68px] h-[68px] bg-white rounded-full flex justify-center items-center">
                 <svg
@@ -94,7 +94,7 @@ const SpecializeIn = () => {
             </div>
             <h1 className="text-base font-medium">women’s health</h1>
           </div>
-          <div>
+          <div className="flex flex-col justify-center items-center">
             <div className="w-[86px] h-[86px] rounded-lg bg-[#FFF7E2] flex justify-center items-center text-[#3A643B] border">
               <div className="w-[68px] h-[68px] bg-white rounded-full flex justify-center items-center">
                 <svg
@@ -126,7 +126,7 @@ const SpecializeIn = () => {
             <h1 className="text-base font-medium">Skin Care</h1>
           </div>
 
-          <div>
+          <div className="flex flex-col justify-center items-center">
             <div className="w-[86px] h-[86px] rounded-lg bg-[#FFF7E2] flex justify-center items-center text-[#3A643B] border">
               <div className="w-[68px] h-[68px] bg-white rounded-full flex justify-center items-center ">
                 <svg
@@ -263,7 +263,7 @@ const SpecializeIn = () => {
             <h1 className="text-base font-medium">Immunity</h1>
           </div>
 
-          <div>
+          <div className="flex flex-col justify-center items-center">
             <div className="w-[86px] h-[86px] rounded-lg bg-[#FFF7E2] flex justify-center items-center text-[#3A643B] border">
               <div className="w-[68px] h-[68px] bg-white rounded-full flex justify-center items-center">
                 <svg

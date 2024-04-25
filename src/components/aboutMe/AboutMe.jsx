@@ -31,7 +31,10 @@ const AboutMe = () => {
             <hr />
           </div>
           <div className="w-[30%] md:w-[20%]">
-            <Link to="/" className="underline text-[16px] md:text-[18px]">
+            <Link
+              to="/Aboutus"
+              className="underline text-[16px] md:text-[18px]"
+            >
               Read More
             </Link>
           </div>

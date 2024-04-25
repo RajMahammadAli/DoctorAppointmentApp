@@ -3,9 +3,19 @@ import TickMark from "../../assets/TickMark.png";
 import { FiClipboard } from "react-icons/fi";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Swal from "sweetalert2";
+import SwiperPractice from "../swiper/SwiperPractice";
+import { useNavigate } from "react-router-dom";
 
 const BookAnAppointment = () => {
   const [selectedMorningSession, setSelectedMorningSession] = useState(null);
+  const [selectedEveningSession, setSelectedEveningSession] = useState(null);
+  const [selectedModeOfSession, setSelectedModeOfSession] = useState(null);
+
+  const modeOfSessions = [
+    { id: 1, mode: "In-Clinic", duration: "45 Mins" },
+    { id: 2, mode: "Video", duration: "45 Mins" },
+    { id: 3, mode: "Chat", duration: "10 Mins" },
+  ];
   const morningSessions = [
     { id: 1, session: "09:00 AM" },
     { id: 2, session: "09:30 AM" },
@@ -14,6 +24,15 @@ const BookAnAppointment = () => {
     { id: 5, session: "10:45 AM" },
     { id: 6, session: "11:00 AM" },
   ];
+  const eveningSessions = [
+    { id: 1, session: "04:00 PM" },
+    { id: 2, session: "04:15 PM" },
+    { id: 3, session: "04:30 PM" },
+    { id: 4, session: "04:45 PM" },
+    { id: 5, session: "05:15 PM" },
+  ];
+
+  const navigate = useNavigate();
   const handleAppointment = () => {
     console.log("You have book an appointment");
     Swal.fire({
@@ -23,12 +42,22 @@ const BookAnAppointment = () => {
       showConfirmButton: false,
       timer: 1500,
     });
+    navigate("/findDoctors");
   };
 
-  const handleSelectSession = (id) => {
-    console.log(id);
-    setSelectedMorningSession(id);
+  const handleSelectSession = (id, sessionName) => {
+    if (sessionName === "morning") {
+      setSelectedMorningSession(id);
+    }
+    if (sessionName === "evening") {
+      setSelectedEveningSession(id);
+    }
+    if (sessionName === "mode") {
+      console.log(id);
+      setSelectedModeOfSession(id);
+    }
   };
+
   return (
     <>
       <div className="px-5 py-4 border rounded-lg">
@@ -49,26 +78,39 @@ const BookAnAppointment = () => {
               <hr />
             </div>
           </div>
-          <div className="px-5 py-3 flex justify-between items-center">
-            <div className="border px-10 py-3 rounded-lg text-center">
-              <h1 className="text-[#1F1F1F] text-base font-[350]">In-Clinic</h1>
-              <p className="text-[#606060] text-base font-normal">45 Mins</p>
-            </div>
-            <div className="bg-[#3a643b41] px-10 py-3 rounded-lg text-center border border-[#3A643B]">
-              {" "}
-              <div className="flex justify-center items-center gap-1 ">
-                <h1 className="text-[#3A643B] text-[18px] font-bold">Video </h1>
-                <span>
-                  <img src={TickMark} alt="tickMark" className="w-5 h-5" />
-                </span>
+
+          <div className="px-16 py-3 grid grid-cols-1 md:grid-cols-3 gap-4 justify-between items-center">
+            {modeOfSessions.map((modeOfSession, index) => (
+              <div
+                onClick={() => handleSelectSession(modeOfSession.id, "mode")}
+                key={index}
+                className={
+                  selectedModeOfSession === modeOfSession.id
+                    ? "border border-[#3A643B] px-5 py-3 rounded-lg text-center cursor-pointer"
+                    : "border px-5 py-3 rounded-lg text-center cursor-pointer"
+                }
+              >
+                <div className="flex justify-center items-center gap-2">
+                  <h1
+                    className={
+                      selectedModeOfSession === modeOfSession.id
+                        ? "text-[#3A643B] text-base font-bold"
+                        : " text-base font-[350]"
+                    }
+                  >
+                    {modeOfSession.mode}{" "}
+                  </h1>
+                  {selectedModeOfSession === modeOfSession.id ? (
+                    <img className="w-5 h-5" src={TickMark} />
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <p className="text-[#606060] text-base font-normal">
+                  {modeOfSession.duration}
+                </p>
               </div>
-              <p className="text-[#606060] text-base font-normal">45 Mins</p>
-            </div>
-            <div className="border px-10 py-3 rounded-lg text-center">
-              {" "}
-              <h1 className="text-[#1F1F1F] text-base font-[350]">Chat</h1>
-              <p className="text-[#606060] text-base font-normal">10 Mins</p>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -86,37 +128,8 @@ const BookAnAppointment = () => {
             </div>
           </div>
           <div>
-            <div className="ml-5 p-5 border rounded-lg flex justify-between items-center gap-2">
-              <div className="w-7 h-7 border rounded-full flex justify-center items-center cursor-pointer">
-                <FaChevronLeft />
-              </div>
-              <div className="flex justify-between items-center gap-3">
-                <div className="bg-[#3a643b41] border border-[#3A643B] px-10 py-3 rounded-lg text-center">
-                  <h1 className="text-[#3A643B] text-base font-semibold">
-                    Mon, 10 Oct
-                  </h1>
-                  <p className="text-[#818181] text-base font-bold">10 slots</p>
-                </div>
-                <div className="border px-10 py-3 rounded-lg text-center">
-                  <h1 className="text-[#1F1F1F] text-base font-semibold">
-                    Tue, 11 Oct
-                  </h1>
-                  <p className="text-[#D5512E] text-base font-normal">
-                    02 slots
-                  </p>
-                </div>
-                <div className="border px-10 py-3 rounded-lg text-center">
-                  <h1 className="text-[#1F1F1F] text-base font-semibold">
-                    Wed, 12 Oct
-                  </h1>
-                  <p className="text-[#F1B93A] text-base font-normal">
-                    05 slots
-                  </p>
-                </div>
-              </div>
-              <div className="w-7 h-7 border rounded-full flex justify-center items-center cursor-pointer">
-                <FaChevronRight />
-              </div>
+            <div className="py-5 border rounded-lg">
+              <SwiperPractice />
             </div>
             {/* morning session */}
             <div>
@@ -124,7 +137,9 @@ const BookAnAppointment = () => {
               <div className="ml-5 flex flex-wrap gap-4">
                 {morningSessions.map((morningSession, index) => (
                   <button
-                    onClick={() => handleSelectSession(morningSession.id)}
+                    onClick={() =>
+                      handleSelectSession(morningSession.id, "morning")
+                    }
                     key={index}
                     className={
                       selectedMorningSession === morningSession.id
@@ -141,21 +156,21 @@ const BookAnAppointment = () => {
             <div>
               <h1 className="ml-5 my-8 text-[18px] font-bold">Evening</h1>
               <div className="ml-5 flex flex-wrap gap-4">
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  04:00 PM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  04:15 PM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  04:30 PM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  04:45 PM
-                </button>
-                <button className="px-4 py-3 border border-[#EBEBEB] rounded-2xl">
-                  05:15 PM
-                </button>
+                {eveningSessions.map((eveningSession, index) => (
+                  <button
+                    onClick={() =>
+                      handleSelectSession(eveningSession.id, "evening")
+                    }
+                    key={index}
+                    className={
+                      selectedEveningSession === eveningSession.id
+                        ? "px-4 py-3 border border-[#EBEBEB] rounded-2xl bg-[#3A643B] text-white"
+                        : "px-4 py-3 border border-[#EBEBEB] rounded-2xl"
+                    }
+                  >
+                    {eveningSession.session}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
