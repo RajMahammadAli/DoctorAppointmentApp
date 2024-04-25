@@ -29,9 +29,9 @@ export const FindDoctors = () => {
             <div className="relative">
               <select className="w-48 pl-8 px-5 py-2 rounded-lg focus:outline-none border text-center">
                 <option>Select Location</option>
-                <option>option 1</option>
-                <option>option 1</option>
-                <option>option 1</option>
+                <option>New Delhi</option>
+                <option>Guzrat</option>
+                <option>Kolkata</option>
               </select>
               <div className="absolute top-2 left-2">
                 <FaLocationDot className="text-[#3A643B]" size={25} />
